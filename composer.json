@@ -8,5 +8,10 @@
             "email": "863970236@qq.com"
         }
     ],
+    "autoload":{
+        "psr-4":{
+            "bet\\":"src"
+        }
+    },
     "require": {}
 }
