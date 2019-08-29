@@ -37,8 +37,8 @@ class prize
 
     public function __construct()
     {
-        $this->path = dirname(__DIR__) . '/file/drawGallery/';
-        $this->currentPath = dirname(__DIR__) . '/file/current/';
+        $this->path = __DIR__ . '/file/drawGallery/';
+        $this->currentPath = __DIR__ . '/file/current/';
         $this->file = $this->scanFile();
     }
 
