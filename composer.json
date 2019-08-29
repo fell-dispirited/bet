@@ -1,0 +1,12 @@
+{
+    "name": "bet/xyz",
+    "description": "this is a lottery draw project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xyz",
+            "email": "863970236@qq.com"
+        }
+    ],
+    "require": {}
+}
