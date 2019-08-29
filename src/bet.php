@@ -62,7 +62,7 @@ class bet implements int_bet
     //重置奖池
     public function retPool()
     {
-
+        $this->initialize();
     }
 
     //抽奖
@@ -89,15 +89,6 @@ class bet implements int_bet
 
     }
 
-    //取出奖池
-    public function putPool()
-    {
-
-    }
-
-
-
-
     //开启奖池
     public function startPool()
     {
@@ -110,8 +101,9 @@ class bet implements int_bet
     }
 
 
-    public function modPool()
+    public function modPool($oldName,$newName)
     {
+
 
     }
 

@@ -24,10 +24,7 @@ class prize
             'num' => '2',
         ]
     ];
-//    //奖品定义名称
-//    public $name = '30';
-//    //数量名称
-//    public $num = 30;
+
     //文件保存目录
     private $path;
     //当前文件
@@ -121,7 +118,17 @@ class prize
     //复制文件
     public function copy($name)
     {
-        copy($this->path.$this->file,$this->currentPath.$this->file);
+        copy($this->path.$name.'txt',$this->currentPath.$name.'txt');
+    }
+
+    //修改当前奖池
+    public function modPool($name)
+    {
+        $this->copy($name);
+        unlink($this->path.$name.'txt');
+        if(file_exists($this->currentPath.'pool.txt')) {
+            unlink($this->currentPath . 'pool.txt');
+        }
     }
 
     //获取当前路径
