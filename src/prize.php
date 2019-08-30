@@ -12,7 +12,8 @@ namespace bet;
 class prize
 {
     //奖品内容
-    private $content = [
+    private $content=
+        [
         [
             'level'=>'一等奖',
             'description'=>'笔记本电脑',
@@ -24,30 +25,39 @@ class prize
             'num' => '2',
         ]
     ];
-
+//    //奖品定义名称
+//    public $name = '30';
+//    //数量名称
+//    public $num = 30;
     //文件保存目录
     private $path;
     //当前文件
     private $currentPath;
 
     public $file;
+    //中奖信息保存页面
+    private $hitoryPath;
 
     public function __construct()
     {
         $this->path = __DIR__ . '/file/drawGallery/';
         $this->currentPath = __DIR__ . '/file/current/';
-        $this->file = $this->scanFile();
+        $this->hitoryPath = __DIR__ . '/file/drawHistory/';
+        $this->file = is_null($this->scanFile())?'xx.jpg':$this->scanFile();
     }
 
     //设置奖池
     public function setPool($prize,$num,$name)
     {
-        $this->name = $name;
-        $this->prize = $prize;
+        $this->file = $name.'.txt';
+//        $this->content = $prize;
         $this->num = $num;
         //存储奖池
         $this->saveByFile();
         $this->copy($this->file);
+        if(!is_null($file = $this->scanFile($this->file))) {
+            unlink($this->currentPath.$file);
+        }
     }
 
 //    //获取当前的奖池
@@ -56,23 +66,14 @@ class prize
 //
 //    }
 
-    //存储奖池
-    public function save($type)
-    {
-        //文件存储方式
-        if($type == 'file')
-        {
-            $this->saveByFile();
-        }
-    }
-
-    public function scanFile()
+    //遍历文件
+    public function scanFile($fileName = null)
     {
         $files = scandir($this->currentPath);
 
         foreach($files as $file)
         {
-            if($file!='.'&&$file!='..'&&$file!='pool.txt')
+            if($file!='.'&&$file!='..'&&$file!='pool.txt'&&$file!=$fileName)
             {
                 return $file;
             }
@@ -98,9 +99,9 @@ class prize
     }
 
     //读取文件
-    public function getByFile($name)
+    public function getByFile($file)
     {
-        $file = $this->currentPath.$name.'.txt';
+        $file = $this->currentPath.$file;
 //        var_dump($file);
         if(!file_exists($file))
         {
@@ -118,23 +119,23 @@ class prize
     //复制文件
     public function copy($name)
     {
-        copy($this->path.$name.'txt',$this->currentPath.$name.'txt');
-    }
-
-    //修改当前奖池
-    public function modPool($name)
-    {
-        $this->copy($name);
-        unlink($this->path.$name.'txt');
-        if(file_exists($this->currentPath.'pool.txt')) {
-            unlink($this->currentPath . 'pool.txt');
-        }
+        copy($this->path.$this->file,$this->currentPath.$this->file);
     }
 
     //获取当前路径
     public function getCurrentPath()
     {
         return $this->currentPath;
+    }
+
+    public function getHistoryPath()
+    {
+        return $this->hitoryPath;
+    }
+
+    public function getPath()
+    {
+        return $this->path;
     }
 
 }

@@ -15,10 +15,7 @@ interface int_bet
     public function retPool();
 
     //抽奖
-    public function draw();
-
-    //修改奖池
-    public function modPool();
+    public function draw($name);
 
     //开启奖池
     public function startPool();
